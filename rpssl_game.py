@@ -195,7 +195,7 @@ def play_rps():
             assert move is not None
             move()
             print('Score: Human {} : Computer {}'.format(HUMAN_SCORE, COMPUTER_SCORE))
-
+            print('Hurray!')
 
 # main function
 if __name__ == '__main__':
