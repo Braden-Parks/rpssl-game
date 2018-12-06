@@ -16,36 +16,48 @@ computer_choice = ""
 
 def choice_to_number(choice):
     """Convert choice to number."""
+    return {
+        'rock': 0,
+        'paper': 1,
+        'scissors': 2,
+        'spock': 3,
+        'lizard': 4
+    }[choice]
 
-    # TODO: Implement
+
     # NOTE
     # A dictionary-based solution (see Clever Programmer tutorial and assignment README) will be preferred.
     # Evaluation will be as follows:
     # 1. Dictionary-based solution: 100%
     # 2. Chain-of-if-statements solution: 80%
 
-    raise NotImplementedError
+
 
 
 def number_to_choice(number):
     """Convert number to choice."""
+    return {
+        0: 'rock',
+        1: 'paper',
+        2: 'scissors',
+        3: 'spock',
+        4: 'lizard'
+    }[number]
 
-    # TODO: Implement
     # NOTE
     # A dictionary-based solution (see Clever Programmer tutorial and assignment README) will be preferred.
     # Evaluation will be as follows:
     # 1. Dictionary-based solution: 100%
     # 2. Chain-of-if-statements solution: 80%
 
-    raise NotImplementedError
+
 
 
 def random_computer_choice():
     """Choose randomly for computer."""
+    return random.choice(['rock', 'paper', 'scissors', 'spock', 'lizard'])
 
-    # TODO: Implement (Hint: Look up random.choice())
 
-    raise NotImplementedError
 
 
 def choice_result(human_move, computer_move):
@@ -60,7 +72,17 @@ def choice_result(human_move, computer_move):
     global COMPUTER_SCORE
     global HUMAN_SCORE
 
-    # TODO: Implement
+    human_value = choice_to_number(human_move)
+    computer_value = choice_to_number(computer_move)
+
+    if ((human_value - computer_value) % 5) in [1, 3]:
+        HUMAN_SCORE += 1
+        return
+    elif ((human_value - computer_value) % 5) in [2, 4]:
+        COMPUTER_SCORE += 1
+        return
+
+
     # Based on the given human_choice and computer_choice,
     # determine who won and increment their score by 1.
     # In case of tie, don't increment anyone's score.
@@ -71,7 +93,6 @@ def choice_result(human_move, computer_move):
     # 1. Modulo-based solution: 100%
     # 2. Chain-of-if-statements solution: 80%
 
-    raise NotImplementedError
 
 
 # DO NOT REMOVE THESE TEST FUNCTIONS.
@@ -188,18 +209,23 @@ def play_rps():
         user_input = get_user_input()
         if user_input == 'q':
             print('Final score: Human {} : Computer {}'.format(HUMAN_SCORE, COMPUTER_SCORE))
-            print('Thanks for playing. Good bye!')
+            print('thanks for playing.')
             break
         else:
             move = moves.get(user_input)
             assert move is not None
             move()
-            print('Score: Human {} : Computer {}'.format(HUMAN_SCORE, COMPUTER_SCORE))
-            print('Hurray!')
+            print('Scores: Human {} : Computer {}'.format(HUMAN_SCORE, COMPUTER_SCORE))
+
+            # added to verify result
+            print('You picked: {} Computer picked: {}'.format(human_choice, computer_choice))
+
 
 # main function
 if __name__ == '__main__':
     # Uncomment to test your functions.
-    # test_all()
+    test_all()
 
-    play_rps()
+play_rps()
+
+#Dummy test comment please ignore
